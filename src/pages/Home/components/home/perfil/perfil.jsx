@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './perfil.scss';
 import { EditOutlined, CloseOutlined } from '@ant-design/icons';
-import EditPerfilPet from '../perfil/EditPerfilPet'; 
+import EditPerfilPet from '../perfil/editPerfilPet'; 
 import api from '../../../../../../src/api'
 import { auth } from "../../../../../services/firebase";
 import { ToastContainer, toast } from 'react-toastify';
