@@ -1,0 +1,210 @@
+/*.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .login-logo{
+     border-radius: 5px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     width: 50%;
+     height: 100%;
+     background-color: #eaeaff;
+     gap: 80px;
+     >img{
+      width: 50%;
+      height: 50%;
+     }
+     >h1{
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #1a1a1d;
+     }
+  }*/
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Monoton:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: 'Poppins' , sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.sidebar{
+  color: #fff;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+  /* margin: 10px; */
+}
+
+.logo-icon{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: rgba(28, 17, 41, 0.85);
+  margin: 12px;
+}
+
+.menu-bar{
+  height: 88vh;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1rem;
+  position: relative;
+}
+//ALTERADO
+.toggle-theme-btn{
+  position: absolute;
+  bottom: 10px;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+//ALTERADO
+.toggle-FouldOutlined{
+  margin-left: 82px; 
+}
+.toggle-Foldlined{
+  margin-left: 200px;  
+}
+
+.title-client{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  font-family: 'Poppins' , sans-serif;
+  line-height: 5px;
+}
+
+.title-chart-consultation{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  font-family: 'Poppins' , sans-serif;
+  line-height: 5px;
+}
+
+.title-calendar{
+  color: black;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  font-family: 'Poppins' , sans-serif;
+  line-height: 5px;  
+}
+
+.btn-logout{  
+ width: auto;     
+ color: black;
+ margin-right: 20px;
+  &:hover {
+    //background: #009ddc; 
+    color: black;
+  }       
+}
+.title-Home{
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+.title-perfil {
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-perfilUser {
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-editPerfilPet {
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-exercise{
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+.title-nutrition{
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-newPet {
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-chart-consultation{
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-consultation{
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-newconsultation{
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+.title-setting {
+  display: flex;
+  padding: 15px;
+  color: black;
+}
+
+
+
+.ToggleThemeButton{
+
+  color: #fff;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  margin: 12px;
+}

@@ -1,0 +1,44 @@
+.container-nutrition {
+    width: 100%;
+    height: 100vh;  
+    display: flex;
+    flex: 1;  
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+.primary-field-nutrition{
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; 
+  
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+  
+      background-image: url('https://img.freepik.com/vetores-premium/desenho-de-osso-de-padrao-sem-emenda-de-pata-de-cachorro_71328-1612.jpg?w=360');
+      background-color: rgba(255, 255, 255, 0.5); 
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat; 
+      opacity: 0.02 
+    }
+
+    .infos-nutrition p {
+        font-size: 16px; 
+      }
+  }
+
+ .p-nutrition{
+    margin-bottom: 150px;
+ } 
