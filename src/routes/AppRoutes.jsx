@@ -5,10 +5,10 @@ import { Home } from "../pages/Home"
 import { Setting } from "../pages/Setting";
 import  Consultation  from "../pages/Home/components/Consultation";
 import  NewConsultation from "../pages/Home/components/NewConsultation"
-import PageHome from "../pages/Home/components/pageHome";
+import PageHome from "../pages/Home/components/PageHome";
 import EditConsultation from "../pages/Home/components/Consultation/editConsultation"
 import  NewPet from "../pages/Home/components/NewPet"
-import Exercise from "../pages/Home/components/exercise"
+import Exercise from "../pages/Home/components/Exercise"
 import Nutrition from "../pages/Home/components/Nutrition";
 
 export function AppRoutes() {

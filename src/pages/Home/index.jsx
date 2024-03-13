@@ -15,9 +15,9 @@ import api from '../../api';
 import Setting from '../Setting/index';
 import Consultation from '../Home/components/Consultation/index'
 import NewConsultation from '../Home/components/NewConsultation/index'
-import PageHome from '../Home/components/pageHome'
+import PageHome from '../Home/components/PageHome'
 import NewPet from './components/NewPet';
-import Exercise from'./components/exercise';
+import Exercise from'./components/Exercise';
 import Nutrition from './components/Nutrition';
 
 const { Header, Sider, Footer, Content } = Layout;
