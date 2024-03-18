@@ -72,7 +72,7 @@ const EditPerfilPet = (dataPet) => {
 
   return ( 
   
-    <><div style={{ display: 'flex', flexDirection: 'column', marginBottom: '500px', marginLeft: '400px', marginTop: '150px' }}>
+    <><div className='editPerfilPet-div' style={{height : '100%'}}>
     {/* Adiciona um marginLeft de 20px para distanciar da esquerda */}
  
     <Form
@@ -91,7 +91,11 @@ const EditPerfilPet = (dataPet) => {
           <img
             src="https://static.vecteezy.com/ti/vetor-gratis/p3/7120890-ilustracao-de-uma-silhueta-de-um-cao-e-gato-vetor.jpg"
             alt="Imagem Ilustrativa"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' ,
+            '@media (max-width: 768px)': {
+              width: '100px', height: '100px',
+            }}}
+            
           />
         </div>
 

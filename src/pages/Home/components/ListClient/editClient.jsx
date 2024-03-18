@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Input, InputNumber, DatePicker, Button, Radio } from 'antd';
 import 'react-toastify/dist/ReactToastify.css';
-import moment from 'moment';
-import 'moment/locale/pt-br'; // Importe o locale para português do Brasil
-import './EditConsultation.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import api from '../../../../../src/api';
+import moment from 'moment';
+import 'moment/locale/pt-br'; // Importe o locale para português do Brasil
+import './editClient.scss';
 
 moment.locale('pt-br'); // Defina o locale para português do Brasil
 
-const EditConsultation = (dataConsultation) => {
+const EditClient = (dataClient) => {
   const layout = {
     labelCol: {
       span: 8,
@@ -19,37 +19,36 @@ const EditConsultation = (dataConsultation) => {
     },
   };
 
+  const notify = () => toast("Sucesso");
+  const notifyErro = () => toast.error("Erro");
   const [value, setValue] = useState(1);
+
   const onChange = (e) => {
     console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
-
-  const notify = () => toast("Sucesso");
-  const notifyErro = () => toast.error("Erro");
-
   
   const onFinish = async (values) => {
     try {
       const data = {
-        ...values.pet,
+        ...values.user,
         Uid: sessionStorage.getItem("user"),
       };
   
       //data.id = idPet;
       console.log("passando data para update ",data)
-      await updateConsultation(data);
+      await updateClient(data);
     } catch (error) {
       console.log(error);
       notifyErro(); // Notifica erro
     }
   };
 
-  const updateConsultation = async (data) => {
+  const updateClient = async (data) => {
     try {
-      data.Id = dataConsultation.dataConsultation.Id;
+      data.Id = dataClient.dataClient.Id;
       console.log("data passada para atualizar",data);
-      const response = await api.patch(`pet/updateConsultation`, data);
+      const response = await api.patch(`client/updateClient`, data);
       console.log(response);
       // Verifica se a atualização foi bem-sucedida
       if (response.status === 200) {
@@ -66,7 +65,7 @@ const EditConsultation = (dataConsultation) => {
   };
 
   return (
-    <div className='editConsultation-div' style={{height : '100%'}}>
+    <div className='editClient-div' style={{height : '100%'}}>
       <Form
         {...layout}
         name="nest-messages"
@@ -87,8 +86,8 @@ const EditConsultation = (dataConsultation) => {
 
           <div>
           <Form.Item
-            name={['pet', 'NomePet']}
-            label="Nome do pet"
+            name={['user', 'Nome']}
+            label="Nome"
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 14 }}
             style={{ marginBottom: '8px' }}
@@ -97,43 +96,21 @@ const EditConsultation = (dataConsultation) => {
             </Form.Item>
 
             <Form.Item
-            name={['pet', 'DataConsulta']}
-            label="Data Consulta"
+            name={['user', 'DataNascimento']}
+            label="Data Nascimento"
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 14 }}
             style={{ marginBottom: '8px' }}
             >
             <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
-            </Form.Item>
+            </Form.Item>           
 
-            <Form.Item
-            name={['pet', 'DataRetorno']}
-            label="Data Retorno"
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 14 }}
-            style={{ marginBottom: '8px' }}
-            >
-            <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
-            </Form.Item>
-
-            <Form.Item
-            name={['pet', 'Tratamento']}
-            label="Recebeu algum tratamento?"
-            rules={[{ required: true, message: 'Por favor, selecione uma opção de tratamento!' }]}
-            labelCol={{ span: 15 }}
-            wrapperCol={{ span: 14 }}
-            style={{ marginBottom: '8px' }}
-            >
-            <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1}>Sim</Radio>
-                <Radio value={2}>Não</Radio>
-            </Radio.Group>
-            </Form.Item>
+          
 
             {value === 1 && (
             <Form.Item
-                name={['pet', 'QualTratamento']}
-                label="Qual tratamento?"
+                name={['user', 'Endereco']}
+                label="Endereço?"
                 labelCol={{ span: 10 }}
                 wrapperCol={{ span: 14 }}
                 style={{ marginBottom: '8px' }}
@@ -143,8 +120,8 @@ const EditConsultation = (dataConsultation) => {
             )}
 
             <Form.Item
-            name={['pet', 'Exame']}
-            label="Exames"
+            name={['user', 'Telefone']}
+            label="Telefone"
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 14 }}
             style={{ marginBottom: '8px' }}
@@ -152,25 +129,7 @@ const EditConsultation = (dataConsultation) => {
             <Input.TextArea />
             </Form.Item>
 
-            <Form.Item
-            name={['pet', 'Prescricao']}
-            label="Prescrição"
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 14 }}
-            style={{ marginBottom: '8px' }}
-            >
-            <Input.TextArea />
-            </Form.Item>
-
-            <Form.Item
-            name={['pet', 'Obsercacao']}
-            label="Observações"
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 14 }}
-            style={{ marginBottom: '8px' }}
-            >
-            <Input.TextArea />
-            </Form.Item>
+            
           </div>
         </div>
 
@@ -185,4 +144,4 @@ const EditConsultation = (dataConsultation) => {
   );
 };
 
-export default EditConsultation;
+export default EditClient;

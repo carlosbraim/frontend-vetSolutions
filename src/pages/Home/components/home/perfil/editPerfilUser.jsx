@@ -56,7 +56,7 @@ const updateUser = async (data) => {
 };
 
 const EditPerfilUser = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh',marginLeft: '400px', marginBottom: '300px' }}>
+  <div className='editPerfilUser' style={{height : '100%'}}>
     <Form
       {...layout}
       name="nest-messages"
@@ -67,7 +67,7 @@ const EditPerfilUser = () => (
       validateMessages={validateMessages}
     >
       <div style={{ display: 'flex', marginBottom: '16px', alignItems: 'center' }}>
-        <div style={{ marginRight: '24px', overflow: 'hidden', width: '200px', height: '200px', borderRadius: '50%', border: '1px solid #ddd' }}>
+        <div style={{ marginRight: '24px', overflow: 'hidden', width: '150px', height: '150px', borderRadius: '50%', border: '1px solid #ddd'  }}>
           <img
             src="https://static.thenounproject.com/png/638636-200.png"
             alt="Imagem Ilustrativa"

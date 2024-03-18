@@ -78,7 +78,7 @@ const NewPet = () => {
 
   return ( 
   
-    <><div style={{ display: 'flex', flexDirection: 'column', marginBottom: '500px', marginLeft: '400px', marginTop: '150px' }}>
+    <><div className='newPet-div' style={{height : '100%'}}>
     {/* Adiciona um marginLeft de 20px para distanciar da esquerda */}
  
     <Form
@@ -91,7 +91,7 @@ const NewPet = () => {
       }}
 
     >
-      <div style={{ display: 'flex', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', marginBottom: '16px'}}>
         {/* Adiciona a imagem ao lado de todos os campos */}
         <div style={{ marginRight: '24px', borderRadius: '50%', overflow: 'hidden', width: '200px', height: '200px' }}>
           <img

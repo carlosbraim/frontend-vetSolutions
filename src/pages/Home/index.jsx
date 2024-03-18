@@ -19,6 +19,8 @@ import PageHome from '../Home/components/PageHome'
 import NewPet from './components/NewPet';
 import Exercise from'./components/Exercise';
 import Nutrition from './components/Nutrition';
+import ListClient from './components/ListClient';
+import NewClient from './components/NewClient'
 
 const { Header, Sider, Footer, Content } = Layout;
 
@@ -26,7 +28,7 @@ export function Home() {
   const [selectedContent, setSelectedContent] = useState('perfil');
   const [darkTheme, setDarkTheme] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
 
   const toggleTheme = () => {
     setDarkTheme(!darkTheme);
@@ -45,7 +47,7 @@ export function Home() {
     });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         const { uid, displayName, email, photoURL } = user;
@@ -58,20 +60,20 @@ export function Home() {
 
         setUser(user);
         console.log(data);
-        postAuthentication(data);
+       // postAuthentication(data);
       } else {
         setUser(null);
       }
     });
 
     return () => unsubscribe();
-  }, []);        
+  }, []);     */   
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const postAuthentication = async (data) => {
+  /*const postAuthentication = async (data) => {
     console.log("Data", data)
     await api.post('user/authentication', data)
       .then(function(response){
@@ -83,7 +85,7 @@ export function Home() {
       }).catch(function(error){
         console.log("Erro ao executar API" + error);
       });
-  }
+  }*/
 
   return (
     <>
@@ -130,13 +132,7 @@ export function Home() {
             </Button>
           </Header>
 
-          <Content
-            style={{
-              margin: '24px 240px 0',
-              overflow: 'initial',
-              padding: 24,
-              textAlign: 'center',
-            }}
+          <Content className='content-home'
           >
       
             {selectedContent === 'home' && (
@@ -159,7 +155,7 @@ export function Home() {
             )}
             {selectedContent === 'newPet' && (
               <div className="title-newPet">
-                <h3>Adicione um novo pet</h3>
+                <h3 className='h3-newPet'>Novo pet</h3>
                 <NewPet />
               </div>
             )}
@@ -181,6 +177,12 @@ export function Home() {
                 <Calendar />
               </div>
             )}
+            {selectedContent === 'listClient' && (
+              <div className="title-client">
+                <h3>Lista Cliente</h3>
+                <ListClient />
+              </div>
+            )}
             {selectedContent === 'chartConsultation' && (
               <div className="title-chart-consultation">
                 <h3>Consultas</h3>
@@ -198,6 +200,13 @@ export function Home() {
               <div className="title-consultation">
                 <h3>Consultas Cadastradas</h3>
                 <Consultation />
+              </div>
+            )}
+            
+            {selectedContent === 'newClient' && (
+              <div className="title-newconsultation">
+                <h3>Novo cliente</h3>
+                <NewClient />
               </div>
             )}
 
@@ -219,6 +228,7 @@ export function Home() {
       
           <Footer
             style={{
+              marginTop: '400px',
               textAlign: 'center',
             }}
           >

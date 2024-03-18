@@ -5,6 +5,7 @@ import { auth } from "../../services/firebase";
 import { Link } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import "./styles.scss";
+import api from '../../api';
 
 
 
@@ -12,13 +13,53 @@ export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false)
+  const [userFirebase, setUser] = useState(null);
 
   //caso o usuario ja esteja logado na aplicação
   auth.onAuthStateChanged(user => {
     if (user) {
-        window.location.href = "/home";
+      getFirebase()
+      window.location.href = "/home";
     }
   });
+
+  const postAuthentication = async (data) => {
+    console.log("Data", data)
+    await api.post('user/authentication', data)
+      .then(function(response){
+        if(response.status == 200){
+          console.log("Api executada com sucesso");
+          console.log('response', response)          
+          sessionStorage.setItem('token', response.data.token)
+        }
+      }).catch(function(error){
+        console.log("Erro ao executar API" + error);
+      });
+  }
+
+
+  const getFirebase = () => {
+    const unsubscribe = auth.onAuthStateChanged((userFirebase) => {
+      if (userFirebase) {
+        const { uid, displayName, email, photoURL } = userFirebase;
+        const data = {
+          "uid": uid,
+          "name": displayName,
+          "email": email,
+          "photoURL": photoURL
+        }
+
+        setUser(userFirebase);
+        console.log(data);
+        postAuthentication(data);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  };    
+
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -37,9 +78,11 @@ export function Register() {
     return <p>carregando...</p>;
   }
   if(user){
+    getFirebase()
     return console.log(user)
   }
 
+  
   return (
     <div className="container">
 
@@ -85,8 +128,7 @@ export function Register() {
                 )}
               </div>
             </div>
-            <p> {email}</p>
-            <p>{password}</p>
+        
             <button onClick={handleSignOut} type="submit">
               Cadastrar
             </button>

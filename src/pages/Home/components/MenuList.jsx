@@ -59,6 +59,21 @@ const MenuList = ({ darkTheme, onMenuClick }) => {
         </Menu.Item>
         
       </Menu.SubMenu>
+      {decoded && decoded.typeUser === 2 ?  
+        <Menu.SubMenu 
+          key='tasks-clientes' 
+          icon={<AppstoreOutlined></AppstoreOutlined>} 
+          title="Clientes"
+        >
+          <Menu.Item key="listClient" icon={<AppstoreOutlined/>}>
+            Lista Cliente
+          </Menu.Item>
+          <Menu.Item key="newClient" icon={<PlusOutlined />}>
+            Cliente
+          </Menu.Item>          
+        </Menu.SubMenu>
+        : null
+      }
 
       <Menu.SubMenu 
         key='tasks' 

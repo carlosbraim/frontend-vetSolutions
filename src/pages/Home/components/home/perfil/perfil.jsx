@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './perfil.scss';
 import { EditOutlined, CloseOutlined } from '@ant-design/icons';
-import EditPerfilPet from '../perfil/editPerfilPet'; 
+import EditPerfilPet from '../perfil/EditPerfilPet'; 
 import api from '../../../../../../src/api'
 import { auth } from "../../../../../services/firebase";
 import { ToastContainer, toast } from 'react-toastify';
@@ -71,6 +71,15 @@ function Perfil() {
         notifyErro(); // Notifica erro
       }
     };
+
+    function formatDate(dateString) {
+      const dateObject = new Date(dateString); // Parse the date string into a Date object
+      const day = dateObject.getDate().toString().padStart(2, '0');
+      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+      const year = dateObject.getFullYear();
+    
+      return `${day}/${month}/${year}`;
+    }
     
 
     return (
@@ -90,8 +99,8 @@ function Perfil() {
                 <img
                   className='imgPerfilPet'
                   src={petDados?.PhotoUrl}
-                  width={310}
-                  height={310}
+                  width={250}
+                  height={250}
                 />
               </div>
               <div className="infos">              
@@ -110,7 +119,7 @@ function Perfil() {
                     <p><strong>Peso:</strong> {petDados?.Peso}</p>
                   </li>
                   <li>
-                    <p><strong>Ultima consulta:</strong> {petDados?.UltimaConsulta} </p>
+                  <p><strong>Ultima consulta:</strong> {formatDate(petDados?.UltimaConsulta)} </p>
                   </li>
                   <li>
                     <p><strong>Obs.:</strong> {petDados?.Obs} </p>

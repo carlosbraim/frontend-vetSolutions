@@ -12,7 +12,7 @@ import api from '../../../../api';
 
 moment.locale('pt-br'); // Defina o locale para português do Brasil
 
-const NewConsultation = () => {
+const NewClient = () => {
   const layout = {
     labelCol: {
       span: 8,
@@ -47,19 +47,19 @@ const NewConsultation = () => {
   const onFinish = async (values) => {
     try {
       const data = {
-        ...values.pet,     
+        ...values.user,     
         uid_dadosusuario_fk: decoded.uid,
       }; 
-      await postConsultation(data);
+      await postClient(data);
     } catch (error) {
       console.log(error);
       notifyErro(); // Notifica erro
     }
   };
   
-  const postConsultation = async (data) => {
+  const postClient = async (data) => {
     console.log("nova consulta",data)
-    await api.post('pet/newConsultation', data)
+    await api.post('client/newClient', data)
       .then(function(response){
         if(response.status == 200){
           notify(); // Notifica sucesso
@@ -72,10 +72,8 @@ const NewConsultation = () => {
         notifyErro(); // Notifica erro
       });
   }
-
-
   return (
-    <div className='newConsultation-div' style={{height : '100%'}}>
+    <div className='newClient-div' style={{height : '100%'}}>
       <Form
         {...layout}
         name="nest-messages"
@@ -86,9 +84,9 @@ const NewConsultation = () => {
         }}
       >
         <div style={{ display: 'flex', marginBottom: '16px' }}>
-          <div style={{ marginRight: '24px', borderRadius: '50%', overflow: 'hidden', width: '200px', height: '200px' }}>
+          <div style={{  overflow: 'hidden', width: '200px', height: '200px' }}>
             <img
-              src="https://cdn-icons-png.flaticon.com/512/1004/1004759.png"
+              src="https://cdn-icons-png.flaticon.com/512/3447/3447545.png"
               alt="Imagem Ilustrativa"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
@@ -96,90 +94,50 @@ const NewConsultation = () => {
 
           <div>
           <Form.Item
-            name={['pet', 'NomePet']}
-            label="Nome do pet"
+            name={['user', 'Nome']}
+            label="Nome"
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 14 }}
-
+            style={{ marginBottom: '8px' }}
             >
             <Input />
             </Form.Item>
 
             <Form.Item
-            name={['pet', 'DataConsulta']}
-            label="Data Consulta"
+            name={['user', 'DataNascimento']}
+            label="Data Nascimento"
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 14 }}
- 
+            style={{ marginBottom: '8px' }}
             >
             <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
-            </Form.Item>
+            </Form.Item>           
 
-            <Form.Item
-            name={['pet', 'DataRetorno']}
-            label="Data Retorno"
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 14 }}
-    
-            >
-            <DatePicker style={{ width: '100%' }} format="DD/MM/YYYY" />
-            </Form.Item>
-
-            <Form.Item
-            name={['pet', 'Tratamento']}
-            label="Recebeu algum tratamento?"
-            rules={[{ required: true, message: 'Por favor, selecione uma opção de tratamento!' }]}
-            labelCol={{ span: 15 }}
-            wrapperCol={{ span: 14 }}
-      
-            >
-            <Radio.Group onChange={onChange} value={value}>
-                <Radio value={1}>Sim</Radio>
-                <Radio value={2}>Não</Radio>
-            </Radio.Group>
-            </Form.Item>
+          
 
             {value === 1 && (
             <Form.Item
-                name={['pet', 'QualTratamento']}
-                label="Qual tratamento?"
+                name={['user', 'Endereco']}
+                label="Endereço?"
                 labelCol={{ span: 10 }}
                 wrapperCol={{ span: 14 }}
-             
+                style={{ marginBottom: '8px' }}
             >
                 <Input.TextArea />
             </Form.Item>
             )}
 
             <Form.Item
-            name={['pet', 'Exame']}
-            label="Exames"
+            name={['user', 'Telefone']}
+            label="Telefone"
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 14 }}
-   
+            style={{ marginBottom: '8px' }}
             >
             <Input.TextArea />
             </Form.Item>
 
-            <Form.Item
-            name={['pet', 'Prescricao']}
-            label="Prescrição"
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 14 }}
-         
-            >
-            <Input.TextArea />
-            </Form.Item>
-
-            <Form.Item
-            name={['pet', 'Obsercacao']}
-            label="Observações"
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 14 }}
-      
-            >
-            <Input.TextArea />
-            </Form.Item>
+            
           </div>
         </div>
 
@@ -194,4 +152,4 @@ const NewConsultation = () => {
   );
 };
 
-export default NewConsultation;
+export default NewClient;

@@ -1,18 +1,18 @@
 
 
-.editPerfilUser-div{
+.newClient-div{
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 500px;
-    margin-left: 400px;
-    margin-top: 150px;  
+    margin-bottom: 50px;
+    margin-left: 40px;
+    margin-top: 15px;  
     align-items: center;
-    padding: 24px;
+    padding: 2px;
   }
   
   @media (min-width: 768px) {
-    .editPerfilUser-div{
+    .newClient-div{
       height: 100%;
       display: flex;
       flex-direction: column;

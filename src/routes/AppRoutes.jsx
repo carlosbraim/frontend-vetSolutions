@@ -10,6 +10,8 @@ import EditConsultation from "../pages/Home/components/Consultation/editConsulta
 import  NewPet from "../pages/Home/components/NewPet"
 import Exercise from "../pages/Home/components/Exercise"
 import Nutrition from "../pages/Home/components/Nutrition";
+import ListClient from "../pages/Home/components/ListClient"
+import EditClient from "../pages/Home/components/ListClient/editClient"
 
 export function AppRoutes() {
   return (
@@ -26,6 +28,8 @@ export function AppRoutes() {
         <Route path="/setting" element={<Setting/>} />
         <Route path="/exercise" element={<Exercise/>} />
         <Route path="/nutrition" element={<Nutrition/>} />
+        <Route path="/listclient" element={<ListClient/>} />
+        <Route path="/editclient" element={<EditClient/>} />
       </Routes>
     </BrowserRouter>
   );

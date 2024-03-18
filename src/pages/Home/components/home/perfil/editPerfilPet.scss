@@ -64,4 +64,27 @@ body.editPerfilPetPage {
   }
 
   
+  .editPerfilPet-div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 500px;
+    margin-left: 400px;
+    margin-top: 150px;  
+    align-items: center;
+    padding: 24px;
+  }
+  
+  @media (min-width: 768px) {
+    .editPerfilPet-div{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 500px;
+      margin-left: 400px;
+      margin-top: 150px;
+      padding: 24px;
+    }
+  }
   

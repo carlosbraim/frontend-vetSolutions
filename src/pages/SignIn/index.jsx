@@ -3,9 +3,10 @@ import { Envelope, Lock, Eye, EyeSlash } from 'phosphor-react'
 import { FcGoogle } from "react-icons/fc";
 import { Link , useNavigate} from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 import {auth} from '../../services/firebase'
 import './styles.scss'
+import api from '../../api';
 
 export function SignIn(){
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ export function SignIn(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [show, setShow] = useState(false)
+    const [msg, setMsg] = useState("")
+    const [userFirebase, setUser] = useState(null);
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -23,20 +26,64 @@ export function SignIn(){
     //caso o usuario ja esteja logado na aplicação
     auth.onAuthStateChanged(user => {
         if (user) {
+            getFirebase()
             sessionStorage.setItem('user',user.uid)
             window.location.href = "/home";
         }
       });
 
+      const postAuthentication = async (data) => {
+        console.log("Data", data)
+        await api.post('user/authentication', data)
+          .then(function(response){
+            if(response.status == 200){
+              console.log("Api executada com sucesso");
+              console.log('response', response)          
+              sessionStorage.setItem('token', response.data.token)
+            }
+          }).catch(function(error){
+            console.log("Erro ao executar API" + error);
+          });
+      }
+
+
+      const getFirebase = () => {
+        const unsubscribe = auth.onAuthStateChanged((userFirebase) => {
+          if (userFirebase) {
+            const { uid, displayName, email, photoURL } = userFirebase;
+            const data = {
+              "uid": uid,
+              "name": displayName,
+              "email": email,
+              "photoURL": photoURL
+            }
+    
+            setUser(userFirebase);
+            console.log(data);
+            postAuthentication(data);
+          } else {
+            setUser(null);
+          }
+        });
+    
+        return () => unsubscribe();
+      };    
+
+
+
+
     function handleGoogleSignIn(){
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
-        .then(() => { //.then((result) => {
+        .then((result) => { //.then((result) => {
             //setUser(result.user);
+            console.log(result.user)
+            getFirebase()
             navigate('/home');
-    
+            //sucesso
         }).catch((error) => {
             console.log(error);
+            //mesagem de erro
         });
     }
 
@@ -52,11 +99,12 @@ export function SignIn(){
         return <p>carregando...</p>;
       }
       if (user) {
+        getFirebase()
         navigate('/home');
       }
 
       
-  //ainda com erro deve ser corrigidos
+  /*/ainda com erro deve ser corrigidos
       const recoverPassword = () => {
         if (email) {
           auth.sendPasswordResetEmail(email)
@@ -69,9 +117,40 @@ export function SignIn(){
         } else {
           alert("Por favor, preencha o campo de e-mail.");
         }
-      };      
+      };      */
     
+      /*function recuperarSenha (){
+        auth.sendPasswordResetEmail(email).then(resultado => {
+            setMsg("Email enviado com sucesso");
+        }).catch(error => {
+            setMsg("Erro ao recuperar email");
+        })
+      }*/
 
+
+      function recoverPassword (){        
+        if (email){
+            sendResetPasswordEmail(email)
+        } else {
+            alert("Por favor, preencha o campo de e-mail.");
+        }
+
+        async function sendResetPasswordEmail(email) {
+            try {
+              await sendPasswordResetEmail(auth, email);
+              console.log("success")
+              alert("Email enviado com sucesso");
+              return { error : null};
+            } catch (error) {
+              console.log(error)
+              alert("Erro ao recuperar email", error);
+              return { error}
+            }
+          }
+        }
+        
+
+      
     
     return (
         <div className="container-signin">        
@@ -122,6 +201,7 @@ export function SignIn(){
                                 <input type="checkbox"/> Salvar E-mail?
                             </label>
                             <a href="#" onClick={recoverPassword}>Esqueceu a Senha?</a>
+                            <span>{msg}</span>
                         </div>
                         <button type="submit"onClick={handleSignIn}>
                             Entrar
